@@ -8,8 +8,6 @@
     "serve:pre": "vue-cli-service serve --mode pre",
     "serve:prod": "vue-cli-service serve --mode production",
     "build": "vue-cli-service build",
-    "test": "echo \"Error: no test specified\" && exit 0",
-    "precommit": "npm run lint",
     "lint": "vue-cli-service lint",
     "lint:fix": "vue-cli-service lint --fix",
     "prepare": "husky install"
