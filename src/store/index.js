@@ -9,8 +9,8 @@ import createPersistedState from 'vuex-persistedstate'
 Vue.use(Vuex)
 
 const vuexPersisted=new createPersistedState({
-  key:'demo',
-  storage:window.localStorage//window.sessionStorage,存储在哪里
+  key:'blog',
+  storage:window.sessionStorage//window.sessionStorage,存储在哪里
   // reducer:state=>{
   //   //指定存储的数据，不写，默认全部
   //   demo:state.demo

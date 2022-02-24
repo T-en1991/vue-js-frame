@@ -1,16 +1,12 @@
 import router from '../index'
-import store from '@/store'
+import {getToken} from '../../utils/auth'
+
+
 export default router.beforeEach((to, from, next) => {
-  if(store.state.demo){
-    if (to.meta.requireAuth){
-      //验证
-      console.log('验证')
-    }else{
-      next()
-    }
+  if (to.path==='/login'|| getToken()) {
     next()
-  } else{
+  } else {
     alert('请先登录')
-    next({ path: '/' })
+    next({path: '/login'})
   }
 })

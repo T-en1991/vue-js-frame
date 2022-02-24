@@ -4,6 +4,15 @@ import store from './store'
 import '../src/router/guard/index'
 import router from './router'
 import EventBus from './utils/eventBus'
+import './icons/index' // icon
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+
+import 'normalize.css/normalize.css' // a modern alternative to CSS resets
+import '../src/styles/index.less'
+
+
+Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 window.$eventBus = new EventBus()
@@ -14,15 +23,4 @@ new Vue({
   render: h => h(App)
 }).$mount('#app')
 
-
-//todo
-// 1.vuex及其持久化     【ok】
-// 2.路由权限     【ok】
-// 3.request封装
-// 4.环境
-// 5.通用组件
-// 6.eslint
-// 7.webpack
-// 8.插件
-// 9.git hooks
 

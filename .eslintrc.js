@@ -15,7 +15,7 @@ module.exports = {
     parser: 'babel-eslint'
   },
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 2 : 0, //禁用console
+    'no-console': process.env.NODE_ENV === 'production' ? 1 : 0, //禁用console
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0, //禁用debugger
     'semi': ['error', 'never'], // 不使用分号
     'import/extensions': 'off', // 取消对文件扩展名的验证

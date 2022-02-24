@@ -1,7 +1,7 @@
-import example1 from './example1'
-import example2 from './example2'
+import user from './user'
+import menu from './menu'
 
 export default {
-  example1,
-  example2
+  user,
+  menu
 }

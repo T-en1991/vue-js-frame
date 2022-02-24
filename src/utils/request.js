@@ -3,9 +3,9 @@
 import axios from 'axios'
 // 使用element-ui Message做消息提醒
 import { Message } from 'element-ui'
-
+import {getToken} from './auth'
 //1. 创建新的axios实例，
-export const service = axios.create({
+const service = axios.create({
   // 公共接口--这里注意后面会讲
   baseURL: process.env.VUE_APP_BASE_URL,
   // 超时时间 单位是ms，这里设置了3s的超时时间
@@ -21,10 +21,9 @@ service.interceptors.request.use(
       'Content-Type': 'application/json' //配置请求头
     }
     //注意使用token的时候需要引入cookie方法或者用本地localStorage等方法，推荐js-cookie
-    const token = localStorage.getItem('token') //这里取token之前，你肯定需要先拿到token,存一下
+    const token = getToken() //这里取token之前，你肯定需要先拿到token,存一下
     if (token) {
-      config.params = { token: token } //如果要求携带在参数中
-      config.headers.token = token //如果要求携带在请求头中
+      config.headers['Authorization'] = token //如果要求携带在请求头中
     }
     return config
   },
@@ -37,7 +36,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (response) => {
     //接收到响应数据并成功后的一些共有的处理，关闭loading等
-    return response
+    return response.data
   },
   (error) => {
     /***** 接收到异常响应的处理开始 ****/
