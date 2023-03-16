@@ -1,19 +1,17 @@
-import request from '../utils/request'
+import request from '@utils/request'
 
-
-
-export const getArticleClassfiyList=()=>{
+export const getArticleClassfiyList = () => {
   return request.get('/admin/getArticleClassfiyList')
 }
 
-export const createArticleClassfiy=(data)=>{
+export const createArticleClassfiy = (data) => {
   return request.post('/admin/createArticleClassfiy', data)
 }
 
-export const modifyArticleClassfiy=(data)=>{
+export const modifyArticleClassfiy = (data) => {
   return request.post('/admin/modifyArticleClassfiy', data)
 }
 
-export const deleteArticleClassfiy=(data)=>{
+export const deleteArticleClassfiy = (data) => {
   return request.post('/admin/deleteArticleClassfiy', data)
 }

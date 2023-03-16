@@ -45,7 +45,7 @@
         fixed="right"
         label="操作"
         width="120">
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <el-button :disabled="scope.row.menu_sort<0" type="text" @click="handleEdit(scope.row)">编辑</el-button>
           <el-popconfirm
             style="margin-left: 10px"
@@ -67,49 +67,49 @@
 </template>
 
 <script>
-import {getMenuList, deleteMenu} from '@/api/menu'
+import { getMenuList, deleteMenu } from '@/api/menu'
 import AddDialog from './cmps/AddDialog/AddDialog'
 import EditDialog from './cmps/EditDialog/EditDialog'
 export default {
   name: 'menuManagement',
-  data() {
+  data () {
     return {
-      tableData:[],
-      dialogCreate:false,
-      dialogEdit:false,
+      tableData: [],
+      dialogCreate: false,
+      dialogEdit: false,
       visible: false,
-      row:null
+      row: null
     }
   },
-  components:{
+  components: {
     AddDialog,
     EditDialog
   },
-  created() {
+  created () {
     this.getMenuList()
   },
-  methods:{
-    getMenuList(){
-      getMenuList().then((res)=>{
-        if (res.code!==1){
+  methods: {
+    getMenuList () {
+      getMenuList().then((res) => {
+        if (res.code !== 1) {
           this.$message.error(res.message)
-        }else{
-          this.tableData=res.data
+        } else {
+          this.tableData = res.data
         }
       })
     },
-    handleEdit(row){
-      this.row=row
-      this.dialogEdit=true
+    handleEdit (row) {
+      this.row = row
+      this.dialogEdit = true
     },
-    handleDelete(row){
-      deleteMenu({id:row.id}).then(res=>{
-        if (res.code!==1){
+    handleDelete (row) {
+      deleteMenu({ id: row.id }).then(res => {
+        if (res.code !== 1) {
           this.$message.error(res.message)
-        }else{
+        } else {
           this.$message({
-            type:'success',
-            message:'删除成功'
+            type: 'success',
+            message: '删除成功'
           })
           this.getMenuList()
         }

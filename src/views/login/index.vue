@@ -51,7 +51,7 @@
 import { validUsername } from '../../utils/validate'
 export default {
   name: 'login',
-  data(){
+  data () {
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
         callback(new Error('Please enter the correct user name'))
@@ -66,7 +66,7 @@ export default {
         callback()
       }
     }
-    return{
+    return {
       loginForm: {
         username: 'admin',
         password: 'admin123'
@@ -81,12 +81,12 @@ export default {
       otherQuery: {}
     }
   },
-  methods:{
-    checkCapslock(e) {
+  methods: {
+    checkCapslock (e) {
       const { key } = e
       this.capsTooltip = key && key.length === 1 && (key >= 'A' && key <= 'Z')
     },
-    showPwd() {
+    showPwd () {
       if (this.passwordType === 'password') {
         this.passwordType = ''
       } else {
@@ -96,7 +96,7 @@ export default {
         this.$refs.password.focus()
       })
     },
-    handleLogin() {
+    handleLogin () {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
@@ -118,9 +118,7 @@ export default {
 }
 </script>
 
-
 <style lang="less">
-
 
 @supports (-webkit-mask: none) and (not (cater-color: #fff)) {
   .login-container .el-input input {

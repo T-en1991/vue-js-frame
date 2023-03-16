@@ -24,55 +24,56 @@
 
 <script>
 import { createArticleClassfiy } from '@/api/article'
-import {Message} from 'element-ui'
+import { Message } from 'element-ui'
 export default {
   name: 'AddDialog',
-  data(){
-    return{
+  data () {
+    return {
       form: {
-        name:'',
-        sort:'',
-        description:''
+        name: '',
+        sort: '',
+        description: ''
       },
-      rules:{
-        name:[
+      rules: {
+        name: [
           { required: true, message: '请输入分类名称', trigger: 'blur' },
           {
-            min:1,
-            max:20,
-            message: '长度在 1 到 20 个字符', trigger: 'blur'
+            min: 1,
+            max: 20,
+            message: '长度在 1 到 20 个字符',
+            trigger: 'blur'
           }
         ],
-        sort:[
+        sort: [
           { required: true, message: '请输入分类排序', trigger: 'blur' }
         ]
       }
     }
   },
-  watch:{
-    'form.sort'(n){
-      if (n===undefined||n===''){
+  watch: {
+    'form.sort' (n) {
+      if (n === undefined || n === '') {
         this.$set(this.form, 'sort', 0)
       }
     }
   },
-  methods:{
-    onSubmit() {
+  methods: {
+    onSubmit () {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          createArticleClassfiy(this.form).then(res=>{
-            if (res.code!==1){
+          createArticleClassfiy(this.form).then(res => {
+            if (res.code !== 1) {
               Message.error(res.message)
-            }else{
+            } else {
               this.$message({
-                type:'success',
-                message:'新增成功'
+                type: 'success',
+                message: '新增成功'
               })
               this.$emit('dialogCancel')
               this.$emit('dialogCreate')
             }
           })
-            .catch(err=>{
+            .catch(err => {
               console.log(err)
             })
         } else {

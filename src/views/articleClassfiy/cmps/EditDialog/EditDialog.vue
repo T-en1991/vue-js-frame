@@ -26,66 +26,67 @@
 import { modifyArticleClassfiy } from '@/api/article'
 export default {
   name: 'EditDialog',
-  props:{
-    row:{
-      type:Object,
-      require:true,
-      default:()=>{}
+  props: {
+    row: {
+      type: Object,
+      require: true,
+      default: () => {}
     }
   },
-  data(){
-    return{
+  data () {
+    return {
       form: {
-        name:'',
-        sort:0,
-        description:'',
-        id:''
+        name: '',
+        sort: 0,
+        description: '',
+        id: ''
       },
-      rules:{
-        name:[
+      rules: {
+        name: [
           { required: true, message: '请输入活动名称', trigger: 'blur' },
           {
-            min:1,
-            max:20,
-            message: '长度在 1 到 20 个字符', trigger: 'blur'
+            min: 1,
+            max: 20,
+            message: '长度在 1 到 20 个字符',
+            trigger: 'blur'
           }
         ],
-        sort:[
+        sort: [
           { required: true, message: '请输入分类排序', trigger: 'blur' }
         ]
       }
     }
   },
-  watch:{
-    'form.sort'(n){
-      if (n===undefined||n===''){
+  watch: {
+    'form.sort' (n) {
+      if (n === undefined || n === '') {
         this.$set(this.form, 'sort', 0)
       }
     }
   },
-  mounted() {
+  mounted () {
     this.$set(this.form, 'name', this.row.name)
     this.$set(this.form, 'sort', this.row.sort)
     this.$set(this.form, 'description', this.row.description)
     this.$set(this.form, 'id', this.row.id)
   },
-  methods:{
-    onSubmit() {
+  methods: {
+    onSubmit () {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          modifyArticleClassfiy(this.form).then(res=>{
-            if (res.code!==1){
+          modifyArticleClassfiy(this.form).then(res => {
+            if (res.code !== 1) {
               this.$message.error(res.message)
-            }else{
+            } else {
               this.$message({
-                type:'success',
-                message:'修改成功'
+                type: 'success',
+                message: '修改成功'
               })
               this.$emit('dialogCancel')
               this.$emit('dialogEdit')
             }
           })
-            .catch(err=>{
+            .catch(err => {
               console.log(err)
             })
         } else {

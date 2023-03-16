@@ -27,71 +27,72 @@
 
 <script>
 import { modifyMenu } from '@/api/menu'
-import {Message} from 'element-ui'
+import { Message } from 'element-ui'
 export default {
   name: 'EditDialog',
-  props:{
-    row:{
-      type:Object,
-      require:true,
-      default:()=>{}
+  props: {
+    row: {
+      type: Object,
+      require: true,
+      default: () => {}
     }
   },
-  data(){
-    return{
+  data () {
+    return {
       form: {
-        menu_name:'',
-        menu_sort:0,
-        menu_description:'',
-        menu_router:'',
-        id:''
+        menu_name: '',
+        menu_sort: 0,
+        menu_description: '',
+        menu_router: '',
+        id: ''
       },
-      rules:{
-        menu_name:[
+      rules: {
+        menu_name: [
           { required: true, message: '请输入菜单名称', trigger: 'blur' },
           {
-            min:2,
-            max:5,
-            message: '长度在 2 到 5 个字符', trigger: 'blur'
+            min: 2,
+            max: 5,
+            message: '长度在 2 到 5 个字符',
+            trigger: 'blur'
           }
         ],
-        menu_sort:[
+        menu_sort: [
           { required: true, message: '请输入菜单排序', trigger: 'blur' }
         ]
       }
     }
   },
-  watch:{
-    'form.menu_sort'(n){
-      if (n===undefined||n===''){
+  watch: {
+    'form.menu_sort' (n) {
+      if (n === undefined || n === '') {
         this.$set(this.form, 'menu_sort', 0)
       }
     }
   },
-  mounted() {
+  mounted () {
     this.$set(this.form, 'menu_name', this.row.menu_name)
     this.$set(this.form, 'menu_sort', this.row.menu_sort)
     this.$set(this.form, 'menu_description', this.row.menu_description)
     this.$set(this.form, 'menu_router', this.row.menu_router)
     this.$set(this.form, 'id', this.row.id)
   },
-  methods:{
-    onSubmit() {
+  methods: {
+    onSubmit () {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          modifyMenu(this.form).then(res=>{
-            if (res.code!==1){
+          modifyMenu(this.form).then(res => {
+            if (res.code !== 1) {
               Message.error(res.message)
-            }else{
+            } else {
               this.$message({
-                type:'success',
-                message:'修改成功'
+                type: 'success',
+                message: '修改成功'
               })
               this.$emit('dialogCancel')
               this.$emit('dialogEdit')
             }
           })
-            .catch(err=>{
+            .catch(err => {
               console.log(err)
             })
         } else {

@@ -1,5 +1,5 @@
 
-const mutations={
+const mutations = {
 
 }
 

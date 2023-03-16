@@ -4,7 +4,7 @@
       <el-scrollbar style="height: 100%;">
         <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @select="menuSelect">
           <el-menu-item v-for="(item) in $store.state.menu.menuList" :index="item.menu_router" :key="item.id">
-            <template slot="title">
+            <template v-slot:title>
               <i class="el-icon-location"></i>
               <span slot="title">{{item.menu_name}}</span>
             </template>
@@ -34,31 +34,31 @@
 </template>
 
 <script>
-import {removeToken} from '../utils/auth'
+import { removeToken } from '../utils/auth'
 
 export default {
   name: 'layout',
-  data(){
-    return{
-      searchContent:'',
-      squareUrl:'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80'
+  data () {
+    return {
+      searchContent: '',
+      squareUrl: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80'
     }
   },
-  created(){
+  created () {
     this.getMenuList()
   },
   methods: {
-    loginOut(){
+    loginOut () {
       this.$store.commit('user/SET_TOKEN', '')
       removeToken()
-      this.$router.push({path:'/login'})
+      this.$router.push({ path: '/login' })
     },
-    getMenuList(){
+    getMenuList () {
       this.$store.dispatch('menu/ActionGetMenuList')
     },
-    menuSelect(router){
+    menuSelect (router) {
       this.$router.push({
-        path:`/${router}`
+        path: `/${router}`
       })
     }
   }
@@ -83,7 +83,6 @@ export default {
   background-color: #E9EEF3;
   color: #333;
 }
-
 
 .el-container:nth-child(5) .el-aside,
 .el-container:nth-child(6) .el-aside {

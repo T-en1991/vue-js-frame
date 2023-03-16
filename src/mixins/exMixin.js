@@ -1,10 +1,10 @@
 export default {
-  data(){
-    return{
-      msg:'这是mixin'
+  data () {
+    return {
+      msg: '这是mixin'
     }
   },
-  mounted(){
+  mounted () {
     console.log(this.msg)
   }
 }

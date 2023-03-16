@@ -27,56 +27,57 @@
 
 <script>
 import { createMenu } from '@/api/menu'
-import {Message} from 'element-ui'
+import { Message } from 'element-ui'
 export default {
   name: 'AddDialog',
-  data(){
-    return{
+  data () {
+    return {
       form: {
-        menu_name:'',
-        menu_sort:'',
-        menu_description:'',
-        menu_router:''
+        menu_name: '',
+        menu_sort: '',
+        menu_description: '',
+        menu_router: ''
       },
-      rules:{
-        menu_name:[
+      rules: {
+        menu_name: [
           { required: true, message: '请输入菜单名称', trigger: 'blur' },
           {
-            min:2,
-            max:5,
-            message: '长度在 2 到 5 个字符', trigger: 'blur'
+            min: 2,
+            max: 5,
+            message: '长度在 2 到 5 个字符',
+            trigger: 'blur'
           }
         ],
-        menu_sort:[
+        menu_sort: [
           { required: true, message: '请输入菜单排序', trigger: 'blur' }
         ]
       }
     }
   },
-  watch:{
-    'form.menu_sort'(n){
-      if (n===undefined||n===''){
+  watch: {
+    'form.menu_sort' (n) {
+      if (n === undefined || n === '') {
         this.$set(this.form, 'menu_sort', 0)
       }
     }
   },
-  methods:{
-    onSubmit() {
+  methods: {
+    onSubmit () {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          createMenu(this.form).then(res=>{
-            if (res.code!==1){
+          createMenu(this.form).then(res => {
+            if (res.code !== 1) {
               Message.error(res.message)
-            }else{
+            } else {
               this.$message({
-                type:'success',
-                message:'新增成功'
+                type: 'success',
+                message: '新增成功'
               })
               this.$emit('dialogCancel')
               this.$emit('dialogCreate')
             }
           })
-            .catch(err=>{
+            .catch(err => {
               console.log(err)
             })
         } else {
